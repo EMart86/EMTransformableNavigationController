@@ -17,13 +17,62 @@ EMTransformableNavigationController is available through [CocoaPods](http://coco
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "EMTransformableNavigationController"
+pod 'EMTransformableNavigationController'
 ```
 
 ## Author
 
-eberl_ma@gmx.at, martin.eberl@styria.com
+Martin Eberl eberl_ma@gmx.at
 
 ## License
 
 EMTransformableNavigationController is available under the MIT license. See the LICENSE file for more info.
+
+## Sample
+
+Simply add the NavigationController to your view controller
+
+```swift
+override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    createAndAddTransformableViewController()
+}
+
+private func createAndAddTransformableViewController() {
+    let viewController = UIViewController() //use any viewController
+    viewController.view.backgroundColor = .lightGray
+    let navigationController = EMTransformableNavigationController(rootViewController: viewController)
+    navigationController.add(to: self)
+}
+```
+
+A more convenient way to add a viewController is with the motion shake gesture
+
+
+```swift
+override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+    if motion == .motionShake {
+        createTransformableNavigationController()
+    }
+}
+```
+
+To remove the viewController, simply call
+
+```swift
+    transformableNavigationController.removeFromParentViewController() 
+    //of course the navigationController needed to be stored in a proterty which we called transformableNavigationController
+```
+
+If you don't want the user to move out of the visible frame, simply set following property (defaulf is nil, which allowes the user to drag the navigation controller out of the bounds)
+
+```swift
+transformableNavigationController.allowedFrame = view.bounds
+```
+
+If you think, the user should be allowed to only shrink your view to a specific size, simply set following property (default is 100x100 px)
+
+```swift
+transformableNavigationController.minViewSize = CGSize(width: 300, height: 150)
+```
