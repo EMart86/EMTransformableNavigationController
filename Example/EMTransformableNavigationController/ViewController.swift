@@ -15,7 +15,8 @@ class ViewController: UIViewController {
 
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            if let navigationController = transformableNavigationController {
+            if let navigationController = transformableNavigationController,
+                UIDevice.current.userInterfaceIdiom == .phone {
                 navigationController.removeFromParentViewController()
                 transformableNavigationController = nil
             } else {
@@ -25,11 +26,7 @@ class ViewController: UIViewController {
     }
     
     private func createTransformableNavigationController() {
-        guard transformableNavigationController == nil else {
-            return
-        }
-        
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TableView")
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CatView")
         viewController.view.backgroundColor = .lightGray
         let navigationController = EMTransformableNavigationController(rootViewController: viewController)
         navigationController.allowedFrame = view.bounds
