@@ -9,13 +9,13 @@
 import UIKit
 
 public protocol EMTransformableNavigationControllerDelegate: class {
-    func transformableNavigationController(_ transformableNavigationController: EMTransformableNavigationController, didResize to: CGSize)
+    func transformableNavigationController(_ transformableNavigationController: EMTransformableNavigationController, didTransform to: CGRect)
 }
 
 public final class EMTransformableNavigationController: UINavigationController {
-    var allowedFrame = CGRect.zero
-    var minViewSize = CGSize(width: 100, height: 100)
-    weak var transformDelegate: EMTransformableNavigationControllerDelegate?
+    public var allowedFrame: CGRect?
+    public var minViewSize = CGSize(width: 100, height: 100)
+    public weak var transformDelegate: EMTransformableNavigationControllerDelegate?
     
     fileprivate var lastTouchDownLocation = CGPoint.zero
     fileprivate var lastStoredTouchDownLocation = CGPoint.zero
@@ -53,20 +53,18 @@ public final class EMTransformableNavigationController: UINavigationController {
     //MARK: - Public
     
     public func add(to parent: UIViewController) {
+        willMove(toParentViewController: parent)
         parent.addChildViewController(self)
-        if let window = parent.view.window {
-            window.addSubview(view)
-            if allowedFrame == .zero {
-                allowedFrame = window.frame
-            }
-        } else {
-            parent.view.addSubview(view)
-            if allowedFrame == .zero {
-                allowedFrame = parent.view.frame
-            }
-        }
-        view.frame = allowedFrame
+        parent.view.addSubview(view)
+        view.frame = allowedFrame ?? parent.view.bounds
         didMove(toParentViewController: parent)
+    }
+    
+    public override func removeFromParentViewController() {
+        willMove(toParentViewController: nil)
+        view.removeFromSuperview()
+        didMove(toParentViewController: nil)
+        super.removeFromParentViewController()
     }
     
     //MARK: - Private
@@ -75,51 +73,22 @@ public final class EMTransformableNavigationController: UINavigationController {
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
         
-        if let windowFrame = view.window?.bounds {
-            if allowedFrame == .zero {
-                allowedFrame = windowFrame
-            }
-        }
-        
         view.addGestureRecognizer(panGestureRecognizer)
         view.addGestureRecognizer(pinchGestureRecognizer)
-    }
-    
-    private func correctedOrigin(for view: UIView, moveTo origin: CGPoint, in allowedFrame: CGRect) -> CGPoint {
-        let frame = view.frame
-        let height = frame.height
-        let width = frame.width
-        let allowedWidth = allowedFrame.width
-        let allowedHeight = allowedFrame.height
-        let newXPos = origin.x
-        let newYPos = origin.y
-        var newOriginXPos = newXPos
-        var newOriginYPos = newYPos
-        
-        if newOriginXPos + width > allowedWidth {
-            newOriginXPos = allowedWidth - width
-        } else if newOriginXPos < 0 {
-            newOriginXPos = 0
-        }
-        
-        if newOriginYPos + height > allowedHeight {
-            newOriginYPos = allowedHeight - height
-        } else if newOriginYPos < 0 {
-            newOriginYPos = 0
-        }
-        
-        return CGPoint(x: newOriginXPos, y: newOriginYPos);
     }
     
     //MARK: - Private Objc
     
     @objc private func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
+        let originFrame = view.frame
         var origin = gestureRecognizer.translation(in: self.view.window)
         origin.x += lastTouchDownLocation.x
         origin.y += lastTouchDownLocation.y
         
         view.move(to: origin, stayIn: allowedFrame)
         lastStoredTouchDownLocation = view.frame.origin
+        
+        checkIfChangedAndNotify(originFrame)
     }
     
     @objc private func handlePinch(_ gestureRecognizer: UIPinchGestureRecognizer) {
@@ -130,7 +99,7 @@ public final class EMTransformableNavigationController: UINavigationController {
         let firstTouchLocation = gestureRecognizer.location(ofTouch: 0, in: view.window)
         let secondTouchLocation = gestureRecognizer.location(ofTouch: 1, in: view.window)
         
-        view.resize(between: firstTouchLocation, and: secondTouchLocation)
+        view.resize(between: firstTouchLocation, and: secondTouchLocation, minSize: minViewSize)
         lastStoredTouchDownLocation = view.frame.origin
         
         view.move(
@@ -138,10 +107,12 @@ public final class EMTransformableNavigationController: UINavigationController {
             stayIn: allowedFrame
         )
         
-        let newSize = view.frame.size
-        
-        if !newSize.equalTo(originFrame.size) {
-            transformDelegate?.transformableNavigationController(self, didResize: newSize)
+        checkIfChangedAndNotify(originFrame)
+    }
+    
+    private func checkIfChangedAndNotify(_ originFrame: CGRect) {
+        if !originFrame.equalTo(view.frame)  {
+            transformDelegate?.transformableNavigationController(self, didTransform: view.frame)
         }
     }
 }

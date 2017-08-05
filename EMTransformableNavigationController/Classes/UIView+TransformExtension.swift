@@ -9,11 +9,20 @@
 import UIKit
 
 extension UIView {
-    func resize(between firstTouchLocation: CGPoint, and secondTouchLocation: CGPoint) {
-        self.size = size(between: firstTouchLocation, and: secondTouchLocation)
+    func resize(between firstTouchLocation: CGPoint, and secondTouchLocation: CGPoint, minSize: CGSize? = nil) {
+        var contentSize = size(between: firstTouchLocation, and: secondTouchLocation)
+        if let minSize = minSize {
+            contentSize.width = max(contentSize.width, minSize.width)
+            contentSize.height = max(contentSize.height, minSize.height)
+        }
+        self.size = contentSize
     }
     
-    func move(to newOrigin: CGPoint, stayIn allowedFrame: CGRect) {
+    func move(to newOrigin: CGPoint, stayIn allowedFrame: CGRect?) {
+        guard let allowedFrame = allowedFrame else {
+            self.origin = newOrigin
+            return
+        }
         self.origin = position(for: newOrigin, stayIn: allowedFrame)
     }
     
