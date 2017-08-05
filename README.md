@@ -77,4 +77,4 @@ If you think, the user should be allowed to only shrink your view to a specific 
 transformableNavigationController.minViewSize = CGSize(width: 300, height: 150)
 ```
 
-If you were wondering if all this workes with autolayout; it does, i just tested it :)
+If you were wondering if all this works with autolayout; it does, i just tested it :)
