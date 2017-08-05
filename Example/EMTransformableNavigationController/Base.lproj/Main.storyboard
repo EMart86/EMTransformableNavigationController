@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -81,5 +82,39 @@
             </objects>
             <point key="canvasLocation" x="844" y="63.418290854572717"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Zdd-zG-R2r">
+            <objects>
+                <viewController storyboardIdentifier="CatView" id="pw5-Ne-KVG" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="j3h-Sd-xwa"/>
+                        <viewControllerLayoutGuide type="bottom" id="ebD-XH-zNI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XJ8-nY-ZVR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat-pet-animal-domestic-104827" translatesAutoresizingMaskIntoConstraints="NO" id="QpC-dn-0WY">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="249"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QpC-dn-0WY" secondAttribute="height" multiplier="527:350" id="EaM-Ux-tKg"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QpC-dn-0WY" firstAttribute="top" secondItem="XJ8-nY-ZVR" secondAttribute="top" id="P2F-xw-CE4"/>
+                            <constraint firstItem="QpC-dn-0WY" firstAttribute="leading" secondItem="XJ8-nY-ZVR" secondAttribute="leading" id="SCm-So-8Z8"/>
+                            <constraint firstAttribute="trailing" secondItem="QpC-dn-0WY" secondAttribute="trailing" id="cpx-qF-qSh"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fnw-RA-Kfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1525.5999999999999" y="62.518740629685162"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="cat-pet-animal-domestic-104827" width="527" height="350"/>
+    </resources>
 </document>
