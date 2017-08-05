@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'EMTransformableNavigationController_Example' do
+  pod 'EMTransformableNavigationController', :path => '../'
+
+  target 'EMTransformableNavigationController_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase'
+  end
+end
