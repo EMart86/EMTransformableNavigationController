@@ -28,7 +28,7 @@ Martin Eberl eberl_ma@gmx.at
 
 EMTransformableNavigationController is available under the MIT license. See the LICENSE file for more info.
 
-## Sample
+## Example 
 
 Simply add the NavigationController to your view controller
 
@@ -76,3 +76,5 @@ If you think, the user should be allowed to only shrink your view to a specific 
 ```swift
 transformableNavigationController.minViewSize = CGSize(width: 300, height: 150)
 ```
+
+If you were wondering if all this workes with autolayout; it does, i just tested it :)
