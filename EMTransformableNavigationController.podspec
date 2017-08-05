@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 This derived UINavigationController with Pinch and Pan Gesture Recognition is designed to be dragged and pinched along on the window. Since you can pinch these navigation controllers, your client can add many small draggable windows and thus let the user design his/her own control window.
                        DESC
 
-  s.homepage         = 'https://github.com/eberl_ma@gmx.at/EMTransformableNavigationController'
+  s.homepage         = 'https://github.com/EMart86/EMTransformableNavigationController'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'eberl_ma@gmx.at' => 'martin.eberl@styria.com' }
-  s.source           = { :git => 'https://github.com/eberl_ma@gmx.at/EMTransformableNavigationController.git', :tag => s.version.to_s }
+  s.author           = { 'Martin Eberl' => 'eberl_ma@gmx.at' }
+  s.source           = { :git => 'https://github.com/EMart86/EMTransformableNavigationController.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
 
