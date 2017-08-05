@@ -22,7 +22,7 @@ This derived UINavigationController with Pinch and Pan Gesture Recognition is de
                        DESC
 
   s.homepage         = 'https://github.com/EMart86/EMTransformableNavigationController'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.screenshots     = 'https://github.com/EMart86/EMTransformableNavigationController/blob/develop/Example/Bildschirmfoto%202017-08-06%20um%2001.05.55.png'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Martin Eberl' => 'eberl_ma@gmx.at' }
   s.source           = { :git => 'https://github.com/EMart86/EMTransformableNavigationController.git', :tag => s.version.to_s }
