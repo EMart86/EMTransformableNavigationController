@@ -5,9 +5,6 @@
 [![License](https://img.shields.io/cocoapods/l/EMTransformableNavigationController.svg?style=flat)](http://cocoapods.org/pods/EMTransformableNavigationController)
 [![Platform](https://img.shields.io/cocoapods/p/EMTransformableNavigationController.svg?style=flat)](http://cocoapods.org/pods/EMTransformableNavigationController)
 
-![Screenshot](https://github.com/EMart86/EMTransformableNavigationController/blob/develop/Example/Bildschirmfoto%202017-08-06%20um%2001.05.55.png)
-
-
 ![Animation](./EMTransformableNavigationController-iPhone-Sample-720.gif)
 
 ## Example
