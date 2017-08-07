@@ -1,5 +1,7 @@
 # EMTransformableNavigationController
 
+![Animation](./EMTransformableNavigationController-iPhone-Sample-small.gif)
+
 [![CI Status](http://img.shields.io/travis/eberl_ma@gmx.at/EMTransformableNavigationController.svg?style=flat)](https://travis-ci.org/eberl_ma@gmx.at/EMTransformableNavigationController)
 [![Version](https://img.shields.io/cocoapods/v/EMTransformableNavigationController.svg?style=flat)](http://cocoapods.org/pods/EMTransformableNavigationController)
 [![License](https://img.shields.io/cocoapods/l/EMTransformableNavigationController.svg?style=flat)](http://cocoapods.org/pods/EMTransformableNavigationController)
